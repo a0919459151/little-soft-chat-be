@@ -7,18 +7,13 @@ using LittleSoftChat.Shared.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 // Add CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder =>
     {
         builder
-            .WithOrigins("http://localhost:3000", "https://localhost:3000") // React app
+            .WithOrigins("http://localhost:3000", "https://localhost:3000", "http://localhost:5173") // React/Vue app
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials(); // Required for SignalR
@@ -59,25 +54,7 @@ builder.Services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationSch
     };
 });
 
-// Add HTTP clients for other services
-builder.Services.AddHttpClient("UserService", client =>
-{
-    client.BaseAddress = new Uri(builder.Configuration["HttpClients:UserService"]!);
-});
-
-builder.Services.AddHttpClient("ChatService", client =>
-{
-    client.BaseAddress = new Uri(builder.Configuration["HttpClients:ChatService"]!);
-});
-
 var app = builder.Build();
-
-// Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
@@ -85,9 +62,14 @@ app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+// Use shared infrastructure middleware
+app.UseSharedInfrastructure();
+
 app.MapGrpcService<NotificationGrpcService>();
 app.MapHub<ChatHub>("/chatHub");
+
+app.MapGet("/", () => "Notification Service is running!");
+app.MapGet("/health", () => "Notification Service is healthy!");
 
 app.Run();
 
