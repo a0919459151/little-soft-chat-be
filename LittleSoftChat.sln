@@ -3,136 +3,40 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1B2C3D4-E5F6-7890-ABCD-123456789000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Shared.Contracts", "src\Shared\LittleSoftChat.Shared.Contracts\LittleSoftChat.Shared.Contracts.csproj", "{495B7818-4D63-5BD5-F733-277A2F628629}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "src\Services", "{A1B2C3D4-E5F6-7890-ABCD-123456789001}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Shared.Domain", "src\Shared\LittleSoftChat.Shared.Domain\LittleSoftChat.Shared.Domain.csproj", "{C31085D7-251E-AA7B-C206-391506F7C005}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "src\Shared", "{A1B2C3D4-E5F6-7890-ABCD-123456789002}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Shared.Infrastructure", "src\Shared\LittleSoftChat.Shared.Infrastructure\LittleSoftChat.Shared.Infrastructure.csproj", "{7610D175-E02E-6378-855D-522A753908A2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "src\Services\User", "{A1B2C3D4-E5F6-7890-ABCD-123456789003}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.API", "src\Services\User\LittleSoftChat.User.API\LittleSoftChat.User.API.csproj", "{7D354EDE-68D2-77AA-8C85-A8EA85C606B8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chat", "src\Services\Chat", "{A1B2C3D4-E5F6-7890-ABCD-123456789004}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Application", "src\Services\User\LittleSoftChat.User.Application\LittleSoftChat.User.Application.csproj", "{76CDB4B8-B987-9AA8-0BC7-E6E1FCDA72CE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "src\Services\Notification", "{A1B2C3D4-E5F6-7890-ABCD-123456789005}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Domain", "src\Services\User\LittleSoftChat.User.Domain\LittleSoftChat.User.Domain.csproj", "{25E5B15F-6824-601B-A2A2-B1EE2BEF1328}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Shared.Contracts", "src\Shared\LittleSoftChat.Shared.Contracts\LittleSoftChat.Shared.Contracts.csproj", "{B1C2D3E4-F5G6-7890-ABCD-123456789010}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Infrastructure", "src\Services\User\LittleSoftChat.User.Infrastructure\LittleSoftChat.User.Infrastructure.csproj", "{1701B8FF-7FE9-9002-7ECF-AA152A82F2BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Shared.Domain", "src\Shared\LittleSoftChat.Shared.Domain\LittleSoftChat.Shared.Domain.csproj", "{B1C2D3E4-F5G6-7890-ABCD-123456789011}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.API", "src\Services\Chat\LittleSoftChat.Chat.API\LittleSoftChat.Chat.API.csproj", "{86CE05D2-D2CF-1ED1-23DD-8459FD9DE1DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Shared.Infrastructure", "src\Shared\LittleSoftChat.Shared.Infrastructure\LittleSoftChat.Shared.Infrastructure.csproj", "{B1C2D3E4-F5G6-7890-ABCD-123456789012}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Application", "src\Services\Chat\LittleSoftChat.Chat.Application\LittleSoftChat.Chat.Application.csproj", "{2805D6DE-5C0E-96A7-2332-4D24AAAD3581}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.API", "src\Services\User\LittleSoftChat.User.API\LittleSoftChat.User.API.csproj", "{C1D2E3F4-G5H6-7890-ABCD-123456789020}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Domain", "src\Services\Chat\LittleSoftChat.Chat.Domain\LittleSoftChat.Chat.Domain.csproj", "{74F845A6-D367-0331-2D58-D6604B4E8DAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Application", "src\Services\User\LittleSoftChat.User.Application\LittleSoftChat.User.Application.csproj", "{C1D2E3F4-G5H6-7890-ABCD-123456789021}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Infrastructure", "src\Services\Chat\LittleSoftChat.Chat.Infrastructure\LittleSoftChat.Chat.Infrastructure.csproj", "{BED3D632-8F22-15A9-C81A-AF1A9D2E9A86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Domain", "src\Services\User\LittleSoftChat.User.Domain\LittleSoftChat.User.Domain.csproj", "{C1D2E3F4-G5H6-7890-ABCD-123456789022}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.API", "src\Services\Notification\LittleSoftChat.Notification.API\LittleSoftChat.Notification.API.csproj", "{C58C4B9F-34F8-139A-E6C1-073701F28D0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Infrastructure", "src\Services\User\LittleSoftChat.User.Infrastructure\LittleSoftChat.User.Infrastructure.csproj", "{C1D2E3F4-G5H6-7890-ABCD-123456789023}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.Application", "src\Services\Notification\LittleSoftChat.Notification.Application\LittleSoftChat.Notification.Application.csproj", "{054BF138-27A1-0031-ED9D-7327000CABAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.API", "src\Services\Chat\LittleSoftChat.Chat.API\LittleSoftChat.Chat.API.csproj", "{D1E2F3G4-H5I6-7890-ABCD-123456789030}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.Domain", "src\Services\Notification\LittleSoftChat.Notification.Domain\LittleSoftChat.Notification.Domain.csproj", "{071656A5-1763-3519-9A79-441180AF7C1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Application", "src\Services\Chat\LittleSoftChat.Chat.Application\LittleSoftChat.Chat.Application.csproj", "{D1E2F3G4-H5I6-7890-ABCD-123456789031}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Domain", "src\Services\Chat\LittleSoftChat.Chat.Domain\LittleSoftChat.Chat.Domain.csproj", "{D1E2F3G4-H5I6-7890-ABCD-123456789032}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Infrastructure", "src\Services\Chat\LittleSoftChat.Chat.Infrastructure\LittleSoftChat.Chat.Infrastructure.csproj", "{D1E2F3G4-H5I6-7890-ABCD-123456789033}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.API", "src\Services\Notification\LittleSoftChat.Notification.API\LittleSoftChat.Notification.API.csproj", "{E1F2G3H4-I5J6-7890-ABCD-123456789040}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.Application", "src\Services\Notification\LittleSoftChat.Notification.Application\LittleSoftChat.Notification.Application.csproj", "{E1F2G3H4-I5J6-7890-ABCD-123456789041}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.Domain", "src\Services\Notification\LittleSoftChat.Notification.Domain\LittleSoftChat.Notification.Domain.csproj", "{E1F2G3H4-I5J6-7890-ABCD-123456789042}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.Infrastructure", "src\Services\Notification\LittleSoftChat.Notification.Infrastructure\LittleSoftChat.Notification.Infrastructure.csproj", "{E1F2G3H4-I5J6-7890-ABCD-123456789043}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.Infrastructure", "src\Services\Notification\LittleSoftChat.Notification.Infrastructure\LittleSoftChat.Notification.Infrastructure.csproj", "{88FD7C21-78EC-9CEA-633D-397F60AC407B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B1C2D3E4-F5G6-7890-ABCD-123456789010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789010}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789010}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789010}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789011}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789011}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789011}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789012}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789012}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1C2D3E4-F5G6-7890-ABCD-123456789012}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789020}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789020}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789020}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789021}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789021}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789021}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789022}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789022}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789022}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789023}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789023}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1D2E3F4-G5H6-7890-ABCD-123456789023}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789030}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789030}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789030}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789031}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789031}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789031}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789032}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789032}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789032}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789033}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789033}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1E2F3G4-H5I6-7890-ABCD-123456789033}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789040}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789040}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789040}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789041}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789041}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789041}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789042}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789042}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789042}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789043}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789043}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1F2G3H4-I5J6-7890-ABCD-123456789043}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A1B2C3D4-E5F6-7890-ABCD-123456789001} = {A1B2C3D4-E5F6-7890-ABCD-123456789000}
-		{A1B2C3D4-E5F6-7890-ABCD-123456789002} = {A1B2C3D4-E5F6-7890-ABCD-123456789000}
-		{A1B2C3D4-E5F6-7890-ABCD-123456789003} = {A1B2C3D4-E5F6-7890-ABCD-123456789001}
-		{A1B2C3D4-E5F6-7890-ABCD-123456789004} = {A1B2C3D4-E5F6-7890-ABCD-123456789001}
-		{A1B2C3D4-E5F6-7890-ABCD-123456789005} = {A1B2C3D4-E5F6-7890-ABCD-123456789001}
-		{B1C2D3E4-F5G6-7890-ABCD-123456789010} = {A1B2C3D4-E5F6-7890-ABCD-123456789002}
-		{B1C2D3E4-F5G6-7890-ABCD-123456789011} = {A1B2C3D4-E5F6-7890-ABCD-123456789002}
-		{B1C2D3E4-F5G6-7890-ABCD-123456789012} = {A1B2C3D4-E5F6-7890-ABCD-123456789002}
-		{C1D2E3F4-G5H6-7890-ABCD-123456789020} = {A1B2C3D4-E5F6-7890-ABCD-123456789003}
-		{C1D2E3F4-G5H6-7890-ABCD-123456789021} = {A1B2C3D4-E5F6-7890-ABCD-123456789003}
-		{C1D2E3F4-G5H6-7890-ABCD-123456789022} = {A1B2C3D4-E5F6-7890-ABCD-123456789003}
-		{C1D2E3F4-G5H6-7890-ABCD-123456789023} = {A1B2C3D4-E5F6-7890-ABCD-123456789003}
-		{D1E2F3G4-H5I6-7890-ABCD-123456789030} = {A1B2C3D4-E5F6-7890-ABCD-123456789004}
-		{D1E2F3G4-H5I6-7890-ABCD-123456789031} = {A1B2C3D4-E5F6-7890-ABCD-123456789004}
-		{D1E2F3G4-H5I6-7890-ABCD-123456789032} = {A1B2C3D4-E5F6-7890-ABCD-123456789004}
-		{D1E2F3G4-H5I6-7890-ABCD-123456789033} = {A1B2C3D4-E5F6-7890-ABCD-123456789004}
-		{E1F2G3H4-I5J6-7890-ABCD-123456789040} = {A1B2C3D4-E5F6-7890-ABCD-123456789005}
-		{E1F2G3H4-I5J6-7890-ABCD-123456789041} = {A1B2C3D4-E5F6-7890-ABCD-123456789005}
-		{E1F2G3H4-I5J6-7890-ABCD-123456789042} = {A1B2C3D4-E5F6-7890-ABCD-123456789005}
-		{E1F2G3H4-I5J6-7890-ABCD-123456789043} = {A1B2C3D4-E5F6-7890-ABCD-123456789005}
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
