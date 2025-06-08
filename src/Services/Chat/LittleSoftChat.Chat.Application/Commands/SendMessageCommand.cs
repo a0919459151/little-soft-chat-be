@@ -44,17 +44,20 @@ public class SendMessageCommandValidator : AbstractValidator<SendMessageCommand>
 public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand, SendMessageResult>
 {
     private readonly IMessageRepository _messageRepository;
+    private readonly IFriendshipRepository _friendshipRepository;
     private readonly IUserGrpcClient _userGrpcClient;
     private readonly INotificationHttpClient _notificationHttpClient;
     private readonly ILogger<SendMessageCommandHandler> _logger;
 
     public SendMessageCommandHandler(
         IMessageRepository messageRepository,
+        IFriendshipRepository friendshipRepository,
         IUserGrpcClient userGrpcClient,
         INotificationHttpClient notificationHttpClient,
         ILogger<SendMessageCommandHandler> logger)
     {
         _messageRepository = messageRepository;
+        _friendshipRepository = friendshipRepository;
         _userGrpcClient = userGrpcClient;
         _notificationHttpClient = notificationHttpClient;
         _logger = logger;
@@ -73,7 +76,14 @@ public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand, Sen
                 return SendMessageResult.Failure("Invalid users");
             }
 
-            // 2. Create and save message
+            // 2. Check if users are friends
+            var friendship = await _friendshipRepository.GetByUsersAsync(request.SenderId, request.ReceiverId);
+            if (friendship == null || friendship.Status != FriendshipStatus.Accepted)
+            {
+                return SendMessageResult.Failure("Users must be friends to send messages");
+            }
+
+            // 3. Create and save message
             var message = new MessageEntity
             {
                 SenderId = request.SenderId,
@@ -85,7 +95,7 @@ public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand, Sen
 
             var messageId = await _messageRepository.CreateAsync(message);
 
-            // 3. Send notification
+            // 4. Send notification
             await _notificationHttpClient.SendNotificationAsync(
                 request.ReceiverId, 
                 $"New message from {sender.DisplayName}", 

@@ -128,23 +128,35 @@ public class FriendshipRepository : IFriendshipRepository
 
         var sql = @"
             SELECT 
-                f.id as RequestId,
-                u.id as SenderId,
-                u.username as SenderUsername,
-                u.display_name as SenderDisplayName,
-                u.avatar as SenderAvatar,
-                f.created_at as CreatedAt
+                f.id as Id,
+                f.user_id as RequesterId,
+                f.friend_id as ReceiverId,
+                f.created_at as CreatedAt,
+                u.id as UserId,
+                u.username as Username,
+                u.display_name as DisplayName,
+                u.avatar as Avatar,
+                u.is_active as IsActive,
+                u.created_at as UserCreatedAt
             FROM friendships f
             JOIN users u ON u.id = f.user_id
             WHERE f.friend_id = @UserId 
               AND f.status = @PendingStatus
             ORDER BY f.created_at DESC";
 
-        var requests = await connection.QueryAsync<FriendRequestDto>(sql, new 
-        { 
-            UserId = userId,
-            PendingStatus = FriendshipStatus.Pending
-        });
+        var requests = await connection.QueryAsync<FriendRequestDto, UserDto, FriendRequestDto>(
+            sql,
+            (friendRequest, user) =>
+            {
+                friendRequest.Requester = user;
+                return friendRequest;
+            },
+            new 
+            { 
+                UserId = userId,
+                PendingStatus = FriendshipStatus.Pending
+            },
+            splitOn: "UserId");
 
         return requests.ToList();
     }

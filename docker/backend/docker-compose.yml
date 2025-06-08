@@ -3,7 +3,7 @@ services:
   user-service:
     build:
       context: ../../
-      dockerfile: src/Services/User/LittleSoftChat.User.API/Dockerfile
+      dockerfile: src/Services/User/LittleSoftChat.User.Presentation/Dockerfile
     container_name: little-soft-chat-user-service
     restart: always
     environment:
@@ -29,7 +29,7 @@ services:
   chat-service:
     build:
       context: ../../
-      dockerfile: src/Services/Chat/LittleSoftChat.Chat.API/Dockerfile
+      dockerfile: src/Services/Chat/LittleSoftChat.Chat.Presentation/Dockerfile
     container_name: little-soft-chat-chat-service
     restart: always
     environment:
@@ -59,7 +59,7 @@ services:
   notification-service:
     build:
       context: ../../
-      dockerfile: src/Services/Notification/LittleSoftChat.Notification.API/Dockerfile
+      dockerfile: src/Services/Notification/LittleSoftChat.Notification.Presentation/Dockerfile
     container_name: little-soft-chat-notification-service
     restart: always
     environment:
@@ -94,7 +94,7 @@ services:
   gateway-api:
     build:
       context: ../../
-      dockerfile: src/Gateway/LittleSoftChat.Gateway.API/Dockerfile
+      dockerfile: src/Gateway/LittleSoftChat.Gateway.Presentation/Dockerfile
     container_name: little-soft-chat-gateway
     restart: always
     environment:

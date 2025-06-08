@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Shared.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Shared.Infrastructure", "src\Shared\LittleSoftChat.Shared.Infrastructure\LittleSoftChat.Shared.Infrastructure.csproj", "{7610D175-E02E-6378-855D-522A753908A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.API", "src\Services\User\LittleSoftChat.User.API\LittleSoftChat.User.API.csproj", "{7D354EDE-68D2-77AA-8C85-A8EA85C606B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Presentation", "src\Services\User\LittleSoftChat.User.Presentation\LittleSoftChat.User.Presentation.csproj", "{7D354EDE-68D2-77AA-8C85-A8EA85C606B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Application", "src\Services\User\LittleSoftChat.User.Application\LittleSoftChat.User.Application.csproj", "{76CDB4B8-B987-9AA8-0BC7-E6E1FCDA72CE}"
 EndProject
@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Domain"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.User.Infrastructure", "src\Services\User\LittleSoftChat.User.Infrastructure\LittleSoftChat.User.Infrastructure.csproj", "{1701B8FF-7FE9-9002-7ECF-AA152A82F2BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.API", "src\Services\Chat\LittleSoftChat.Chat.API\LittleSoftChat.Chat.API.csproj", "{86CE05D2-D2CF-1ED1-23DD-8459FD9DE1DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Presentation", "src\Services\Chat\LittleSoftChat.Chat.Presentation\LittleSoftChat.Chat.Presentation.csproj", "{86CE05D2-D2CF-1ED1-23DD-8459FD9DE1DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Application", "src\Services\Chat\LittleSoftChat.Chat.Application\LittleSoftChat.Chat.Application.csproj", "{2805D6DE-5C0E-96A7-2332-4D24AAAD3581}"
 EndProject
@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Domain"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Chat.Infrastructure", "src\Services\Chat\LittleSoftChat.Chat.Infrastructure\LittleSoftChat.Chat.Infrastructure.csproj", "{BED3D632-8F22-15A9-C81A-AF1A9D2E9A86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.API", "src\Services\Notification\LittleSoftChat.Notification.API\LittleSoftChat.Notification.API.csproj", "{C58C4B9F-34F8-139A-E6C1-073701F28D0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.Presentation", "src\Services\Notification\LittleSoftChat.Notification.Presentation\LittleSoftChat.Notification.Presentation.csproj", "{C58C4B9F-34F8-139A-E6C1-073701F28D0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Notification.Application", "src\Services\Notification\LittleSoftChat.Notification.Application\LittleSoftChat.Notification.Application.csproj", "{054BF138-27A1-0031-ED9D-7327000CABAC}"
 EndProject
@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{6306A8FB-679E-111F-6585-8F70E0EE6013}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Gateway.API", "src\Gateway\LittleSoftChat.Gateway.API\LittleSoftChat.Gateway.API.csproj", "{B7CA1198-CDC1-4243-9933-B3EC6CA081B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleSoftChat.Gateway.Presentation", "src\Gateway\LittleSoftChat.Gateway.Presentation\LittleSoftChat.Gateway.Presentation.csproj", "{B7CA1198-CDC1-4243-9933-B3EC6CA081B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

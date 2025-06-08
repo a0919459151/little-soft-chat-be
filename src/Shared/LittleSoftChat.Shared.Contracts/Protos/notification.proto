@@ -7,6 +7,7 @@ service NotificationService {
   rpc SendNotification(SendNotificationRequest) returns (NotificationResponse);
   rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse);
   rpc MarkAsRead(MarkAsReadRequest) returns (NotificationResponse);
+  rpc MarkAllAsRead(MarkAllAsReadRequest) returns (NotificationResponse);
   rpc GetUnreadCount(GetUnreadCountRequest) returns (UnreadCountResponse);
   rpc DeleteNotification(DeleteNotificationRequest) returns (NotificationResponse);
   rpc BroadcastMessage(BroadcastMessageRequest) returns (BroadcastResponse);
@@ -52,6 +53,10 @@ message GetNotificationsResponse {
 message MarkAsReadRequest {
   int32 notification_id = 1;
   int32 user_id = 2;
+}
+
+message MarkAllAsReadRequest {
+  int32 user_id = 1;
 }
 
 message GetUnreadCountRequest {

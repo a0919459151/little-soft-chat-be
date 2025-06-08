@@ -46,15 +46,19 @@ public static class DependencyInjection
         // gRPC Clients
         services.AddGrpcClient<UserService.UserServiceClient>(options =>
         {
-            options.Address = new Uri(configuration["GrpcServices:UserService"] ?? "https://localhost:5101");
+            options.Address = new Uri(configuration["GrpcClients:UserService"] ?? "http://localhost:5011");
+        })
+        .ConfigurePrimaryHttpMessageHandler(() =>
+        {
+            var handler = new HttpClientHandler();
+            
+            // 支援 HTTP/2 over HTTP（非加密）
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            
+            return handler;
         });
         services.AddScoped<IUserGrpcClient, UserGrpcClient>();
-
-        // HTTP Clients
-        services.AddHttpClient<INotificationHttpClient, NotificationHttpClient>(client =>
-        {
-            client.BaseAddress = new Uri(configuration["HttpServices:NotificationService"] ?? "https://localhost:5103");
-        });
 
         // MediatR Behaviors
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
