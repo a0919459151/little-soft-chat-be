@@ -7,7 +7,11 @@ using LittleSoftChat.Shared.Infrastructure.Authentication;
 using LittleSoftChat.Shared.Infrastructure.Database;
 using LittleSoftChat.Shared.Infrastructure.GrpcClients;
 using LittleSoftChat.Shared.Infrastructure.HttpClients;
+using LittleSoftChat.Shared.Infrastructure.Behaviors;
+using LittleSoftChat.Shared.Infrastructure.Middleware;
 using LittleSoftChat.Shared.Contracts;
+using MediatR;
+using Microsoft.AspNetCore.Builder;
 
 namespace LittleSoftChat.Shared.Infrastructure;
 
@@ -52,6 +56,17 @@ public static class DependencyInjection
             client.BaseAddress = new Uri(configuration["HttpServices:NotificationService"] ?? "https://localhost:5103");
         });
 
+        // MediatR Behaviors
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
+
         return services;
+    }
+
+    public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
+    {
+        app.UseMiddleware<ValidationExceptionMiddleware>();
+        return app;
     }
 }

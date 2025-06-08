@@ -61,6 +61,7 @@ public class NotificationsController : ControllerBase
         return result ? Ok() : BadRequest();
     }
 
+    /*
     [HttpGet("online-status/{userId}")]
     public async Task<IActionResult> GetUserOnlineStatus(int userId)
     {
@@ -69,6 +70,7 @@ public class NotificationsController : ControllerBase
         
         return Ok(new { userId, isOnline = result });
     }
+    */
 
     [HttpPost("send")]
     [AllowAnonymous] // 允許其他服務調用

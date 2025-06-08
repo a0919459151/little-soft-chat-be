@@ -45,6 +45,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 
+// Use shared infrastructure middleware (includes validation exception handling)
+app.UseSharedInfrastructure();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

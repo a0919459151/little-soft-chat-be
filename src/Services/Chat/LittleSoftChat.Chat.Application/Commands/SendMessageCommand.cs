@@ -1,13 +1,45 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
-using LittleSoftChat.Chat.Application.Commands;
+using FluentValidation;
 using LittleSoftChat.Chat.Domain.Entities;
 using LittleSoftChat.Chat.Domain.Repositories;
 using LittleSoftChat.Shared.Domain.Results;
 using LittleSoftChat.Shared.Infrastructure.GrpcClients;
 using LittleSoftChat.Shared.Infrastructure.HttpClients;
 
-namespace LittleSoftChat.Chat.Application.Handlers;
+namespace LittleSoftChat.Chat.Application.Commands;
+
+public record SendMessageCommand(int SenderId, int ReceiverId, string Content, string MessageType = "text") : IRequest<SendMessageResult>;
+
+public class SendMessageCommandValidator : AbstractValidator<SendMessageCommand>
+{
+    public SendMessageCommandValidator()
+    {
+        RuleFor(x => x.SenderId)
+            .GreaterThan(0)
+            .WithMessage("SenderId must be greater than 0");
+
+        RuleFor(x => x.ReceiverId)
+            .GreaterThan(0)
+            .WithMessage("ReceiverId must be greater than 0");
+
+        RuleFor(x => x.Content)
+            .NotEmpty()
+            .WithMessage("Message content cannot be empty")
+            .MaximumLength(2000)
+            .WithMessage("Message content cannot exceed 2000 characters");
+
+        RuleFor(x => x.MessageType)
+            .NotEmpty()
+            .WithMessage("Message type cannot be empty")
+            .Must(type => new[] { "text", "image", "file", "emoji" }.Contains(type))
+            .WithMessage("Message type must be one of: text, image, file, emoji");
+
+        RuleFor(x => x)
+            .Must(command => command.SenderId != command.ReceiverId)
+            .WithMessage("Sender and receiver cannot be the same person");
+    }
+}
 
 public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand, SendMessageResult>
 {
@@ -70,42 +102,6 @@ public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand, Sen
             _logger.LogError(ex, "Error sending message from {SenderId} to {ReceiverId}", 
                 request.SenderId, request.ReceiverId);
             return SendMessageResult.Failure("Failed to send message");
-        }
-    }
-}
-
-public class MarkMessageAsReadCommandHandler : IRequestHandler<MarkMessageAsReadCommand, bool>
-{
-    private readonly IMessageRepository _messageRepository;
-    private readonly ILogger<MarkMessageAsReadCommandHandler> _logger;
-
-    public MarkMessageAsReadCommandHandler(
-        IMessageRepository messageRepository,
-        ILogger<MarkMessageAsReadCommandHandler> logger)
-    {
-        _messageRepository = messageRepository;
-        _logger = logger;
-    }
-
-    public async Task<bool> Handle(MarkMessageAsReadCommand request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var success = await _messageRepository.MarkAsReadAsync(request.MessageId, request.UserId);
-            
-            if (success)
-            {
-                _logger.LogInformation("Message {MessageId} marked as read by user {UserId}", 
-                    request.MessageId, request.UserId);
-            }
-
-            return success;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error marking message {MessageId} as read by user {UserId}", 
-                request.MessageId, request.UserId);
-            return false;
         }
     }
 }
