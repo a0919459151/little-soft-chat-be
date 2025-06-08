@@ -30,61 +30,113 @@ public class UserService : IUserService
         _logger = logger;
     }
 
-    public Task<GatewayModels.LoginResponse> LoginAsync(GatewayModels.LoginRequest request)
+    public async Task<GatewayModels.LoginResponse> LoginAsync(GatewayModels.LoginRequest request)
     {
         try
         {
-            // Note: This is a simplified implementation. In a real scenario, you would:
-            // 1. Validate credentials against a user store (database, external service, etc.)
-            // 2. For now, we'll use the gRPC service to validate if user exists
-            
-            // First, we need to implement a way to validate credentials
-            // Since the gRPC service doesn't have login, we'll return a placeholder
-            _logger.LogWarning("Login functionality needs to be implemented with proper credential validation");
-            
-            return Task.FromResult(new GatewayModels.LoginResponse
+            var grpcRequest = new LittleSoftChat.Shared.Contracts.LoginRequest
             {
-                IsSuccess = false,
-                ErrorMessage = "Login functionality not yet implemented - requires credential validation"
-            });
+                Username = request.Email, // Pass email as username - the User Service will handle both
+                Password = request.Password
+            };
+
+            var grpcResponse = await _userClient.LoginAsync(grpcRequest);
+            
+            var response = new GatewayModels.LoginResponse
+            {
+                IsSuccess = grpcResponse.IsSuccess,
+                Token = grpcResponse.Token,
+                ErrorMessage = grpcResponse.ErrorMessage
+            };
+
+            if (grpcResponse.IsSuccess && grpcResponse.User != null)
+            {
+                response.User = new GatewayModels.UserProfile
+                {
+                    Id = grpcResponse.User.Id,
+                    Username = grpcResponse.User.Username,
+                    DisplayName = grpcResponse.User.DisplayName,
+                    Avatar = grpcResponse.User.Avatar,
+                    IsActive = grpcResponse.User.IsActive,
+                    CreatedAt = DateTime.Parse(grpcResponse.User.CreatedAt)
+                };
+            }
+
+            return response;
         }
-        catch (Exception ex)
+        catch (RpcException ex)
         {
-            _logger.LogError(ex, "Error during login");
-            return Task.FromResult(new GatewayModels.LoginResponse
+            _logger.LogError(ex, "gRPC error during login for user {Email}", request.Email);
+            return new GatewayModels.LoginResponse
             {
                 IsSuccess = false,
                 ErrorMessage = "Authentication service unavailable"
-            });
-        }
-    }
-
-    public Task<GatewayModels.LoginResponse> RegisterAsync(GatewayModels.RegisterRequest request)
-    {
-        try
-        {
-            // Note: Registration would typically involve:
-            // 1. Creating a new user record
-            // 2. Hashing password
-            // 3. Storing in database
-            // Since our gRPC service doesn't expose registration, we'll return a placeholder
-            
-            _logger.LogWarning("Registration functionality needs to be implemented");
-            
-            return Task.FromResult(new GatewayModels.LoginResponse
-            {
-                IsSuccess = false,
-                ErrorMessage = "Registration functionality not yet implemented"
-            });
+            };
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error during registration");
-            return Task.FromResult(new GatewayModels.LoginResponse
+            _logger.LogError(ex, "Error during login for user {Email}", request.Email);
+            return new GatewayModels.LoginResponse
+            {
+                IsSuccess = false,
+                ErrorMessage = "An error occurred during login"
+            };
+        }
+    }
+
+    public async Task<GatewayModels.LoginResponse> RegisterAsync(GatewayModels.RegisterRequest request)
+    {
+        try
+        {
+            var grpcRequest = new LittleSoftChat.Shared.Contracts.RegisterRequest
+            {
+                Username = request.Username,
+                Email = request.Email,
+                Password = request.Password,
+                DisplayName = request.DisplayName
+            };
+
+            var grpcResponse = await _userClient.RegisterAsync(grpcRequest);
+            
+            var response = new GatewayModels.LoginResponse
+            {
+                IsSuccess = grpcResponse.IsSuccess,
+                Token = grpcResponse.Token,
+                ErrorMessage = grpcResponse.ErrorMessage
+            };
+
+            if (grpcResponse.IsSuccess && grpcResponse.User != null)
+            {
+                response.User = new GatewayModels.UserProfile
+                {
+                    Id = grpcResponse.User.Id,
+                    Username = grpcResponse.User.Username,
+                    DisplayName = grpcResponse.User.DisplayName,
+                    Avatar = grpcResponse.User.Avatar,
+                    IsActive = grpcResponse.User.IsActive,
+                    CreatedAt = DateTime.Parse(grpcResponse.User.CreatedAt)
+                };
+            }
+
+            return response;
+        }
+        catch (RpcException ex)
+        {
+            _logger.LogError(ex, "gRPC error during registration for user {Username}", request.Username);
+            return new GatewayModels.LoginResponse
             {
                 IsSuccess = false,
                 ErrorMessage = "Registration service unavailable"
-            });
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during registration for user {Username}", request.Username);
+            return new GatewayModels.LoginResponse
+            {
+                IsSuccess = false,
+                ErrorMessage = "An error occurred during registration"
+            };
         }
     }
 

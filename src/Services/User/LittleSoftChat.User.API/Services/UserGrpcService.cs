@@ -2,6 +2,7 @@ using Grpc.Core;
 using MediatR;
 using LittleSoftChat.Shared.Contracts;
 using LittleSoftChat.User.Application.Queries;
+using LittleSoftChat.User.Application.Commands;
 
 namespace LittleSoftChat.User.API.Services;
 
@@ -124,6 +125,110 @@ public class UserGrpcService : UserService.UserServiceBase
         {
             _logger.LogError(ex, "Error searching users with keyword {Keyword}", request.Keyword);
             throw new RpcException(new Status(StatusCode.Internal, "Internal server error"));
+        }
+    }
+
+    public override async Task<UpdateUserResponse> UpdateUser(UpdateUserRequest request, ServerCallContext context)
+    {
+        try
+        {
+            var command = new UpdateUserProfileCommand(request.UserId, request.DisplayName, request.Avatar);
+            var result = await _mediator.Send(command);
+            
+            return new UpdateUserResponse
+            {
+                Success = result,
+                ErrorMessage = result ? "" : "Failed to update user profile"
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error updating user {UserId}", request.UserId);
+            return new UpdateUserResponse
+            {
+                Success = false,
+                ErrorMessage = "Internal server error"
+            };
+        }
+    }
+
+    public override async Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
+    {
+        try
+        {
+            var command = new LoginCommand(request.Username, request.Password);
+            var result = await _mediator.Send(command);
+            
+            var response = new LoginResponse
+            {
+                IsSuccess = result.IsSuccess,
+                Token = result.Token,
+                ErrorMessage = result.ErrorMessage
+            };
+
+            if (result.IsSuccess && result.User != null)
+            {
+                response.User = new UserResponse
+                {
+                    Id = result.User.Id,
+                    Username = result.User.Username,
+                    DisplayName = result.User.DisplayName,
+                    Avatar = result.User.Avatar,
+                    IsActive = result.User.IsActive,
+                    CreatedAt = result.User.CreatedAt.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                };
+            }
+
+            return response;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during login for user {Username}", request.Username);
+            return new LoginResponse
+            {
+                IsSuccess = false,
+                ErrorMessage = "An error occurred during login"
+            };
+        }
+    }
+
+    public override async Task<RegisterResponse> Register(RegisterRequest request, ServerCallContext context)
+    {
+        try
+        {
+            var command = new RegisterCommand(request.Username, request.Email, request.Password, request.DisplayName);
+            var result = await _mediator.Send(command);
+            
+            var response = new RegisterResponse
+            {
+                IsSuccess = result.IsSuccess,
+                Token = result.Token,
+                ErrorMessage = result.ErrorMessage
+            };
+
+            if (result.IsSuccess && result.User != null)
+            {
+                response.User = new UserResponse
+                {
+                    Id = result.User.Id,
+                    Username = result.User.Username,
+                    DisplayName = result.User.DisplayName,
+                    Avatar = result.User.Avatar,
+                    IsActive = result.User.IsActive,
+                    CreatedAt = result.User.CreatedAt.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                };
+            }
+
+            return response;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during registration for user {Username}", request.Username);
+            return new RegisterResponse
+            {
+                IsSuccess = false,
+                ErrorMessage = "An error occurred during registration"
+            };
         }
     }
 }

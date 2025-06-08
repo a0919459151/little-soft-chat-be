@@ -54,7 +54,14 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResult>
     {
         try
         {
+            // First try to find user by username
             var user = await _userRepository.GetByUsernameAsync(request.Username);
+            
+            // If not found by username, try by email
+            if (user == null)
+            {
+                user = await _userRepository.GetByEmailAsync(request.Username);
+            }
             
             if (user == null || !user.IsActive)
             {

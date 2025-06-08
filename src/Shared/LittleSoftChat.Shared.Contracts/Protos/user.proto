@@ -7,6 +7,8 @@ service UserService {
   rpc ValidateUser(ValidateUserRequest) returns (ValidateUserResponse);
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
   rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Register(RegisterRequest) returns (RegisterResponse);
 }
 
 message GetUserRequest {
@@ -59,4 +61,30 @@ message SearchUsersRequest {
 message SearchUsersResponse {
   repeated UserResponse users = 1;
   int32 total_count = 2;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  bool is_success = 1;
+  string token = 2;
+  string error_message = 3;
+  UserResponse user = 4;
+}
+
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+  string display_name = 4;
+}
+
+message RegisterResponse {
+  bool is_success = 1;
+  string token = 2;
+  string error_message = 3;
+  UserResponse user = 4;
 }
