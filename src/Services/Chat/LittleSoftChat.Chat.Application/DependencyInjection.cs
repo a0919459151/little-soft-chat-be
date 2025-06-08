@@ -1,7 +1,6 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
-using MediatR;
 
 namespace LittleSoftChat.Chat.Application;
 

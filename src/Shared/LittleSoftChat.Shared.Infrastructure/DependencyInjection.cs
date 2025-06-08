@@ -6,7 +6,6 @@ using System.Text;
 using LittleSoftChat.Shared.Infrastructure.Authentication;
 using LittleSoftChat.Shared.Infrastructure.Database;
 using LittleSoftChat.Shared.Infrastructure.GrpcClients;
-using LittleSoftChat.Shared.Infrastructure.HttpClients;
 using LittleSoftChat.Shared.Infrastructure.Behaviors;
 using LittleSoftChat.Shared.Infrastructure.Middleware;
 using LittleSoftChat.Shared.Contracts;

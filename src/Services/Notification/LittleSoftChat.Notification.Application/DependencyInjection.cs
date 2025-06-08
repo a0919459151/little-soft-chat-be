@@ -1,6 +1,5 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using MediatR;
 using LittleSoftChat.Notification.Application.Services;
 
 namespace LittleSoftChat.Notification.Application;

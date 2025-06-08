@@ -1,5 +1,3 @@
-using LittleSoftChat.Shared.Domain.DTOs;
-
 namespace LittleSoftChat.Gateway.Presentation.Models;
 
 public class SendMessageRequest

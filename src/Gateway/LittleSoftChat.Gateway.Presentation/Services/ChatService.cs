@@ -1,6 +1,5 @@
 using LittleSoftChat.Shared.Contracts;
 using LittleSoftChat.Shared.Domain.Results;
-using Google.Protobuf.WellKnownTypes;
 using GatewayModels = LittleSoftChat.Gateway.Presentation.Models;
 
 namespace LittleSoftChat.Gateway.Presentation.Services;

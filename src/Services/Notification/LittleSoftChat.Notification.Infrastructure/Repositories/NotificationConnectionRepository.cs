@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using LittleSoftChat.Notification.Domain.Repositories;
-using LittleSoftChat.Notification.Domain.Entities;
 
 namespace LittleSoftChat.Notification.Infrastructure.Repositories;
 
