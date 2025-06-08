@@ -1,0 +1,116 @@
+syntax = "proto3";
+option csharp_namespace = "LittleSoftChat.Shared.Contracts";
+
+import "google/protobuf/timestamp.proto";
+
+service ChatService {
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse);
+  rpc SendFriendRequest(SendFriendRequestRequest) returns (FriendRequestResponse);
+  rpc AcceptFriendRequest(AcceptFriendRequestRequest) returns (FriendRequestResponse);
+  rpc RejectFriendRequest(RejectFriendRequestRequest) returns (FriendRequestResponse);
+  rpc GetFriends(GetFriendsRequest) returns (GetFriendsResponse);
+  rpc GetFriendRequests(GetFriendRequestsRequest) returns (GetFriendRequestsResponse);
+  rpc RemoveFriend(RemoveFriendRequest) returns (RemoveFriendResponse);
+}
+
+message SendMessageRequest {
+  int32 sender_id = 1;
+  int32 receiver_id = 2;
+  string content = 3;
+  string message_type = 4;
+}
+
+message SendMessageResponse {
+  bool success = 1;
+  int32 message_id = 2;
+  string error_message = 3;
+}
+
+message GetMessagesRequest {
+  int32 user_id = 1;
+  int32 friend_id = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message MessageResponse {
+  int32 id = 1;
+  int32 sender_id = 2;
+  int32 receiver_id = 3;
+  string content = 4;
+  string message_type = 5;
+  google.protobuf.Timestamp sent_at = 6;
+  bool is_read = 7;
+}
+
+message GetMessagesResponse {
+  repeated MessageResponse messages = 1;
+  int32 total_count = 2;
+}
+
+message SendFriendRequestRequest {
+  int32 sender_id = 1;
+  int32 receiver_id = 2;
+  string message = 3;
+}
+
+message AcceptFriendRequestRequest {
+  int32 request_id = 1;
+  int32 user_id = 2;
+}
+
+message RejectFriendRequestRequest {
+  int32 request_id = 1;
+  int32 user_id = 2;
+}
+
+message FriendRequestResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message GetFriendsRequest {
+  int32 user_id = 1;
+}
+
+message FriendResponse {
+  int32 id = 1;
+  string username = 2;
+  string display_name = 3;
+  string avatar = 4;
+  bool is_online = 5;
+  google.protobuf.Timestamp last_seen = 6;
+}
+
+message GetFriendsResponse {
+  repeated FriendResponse friends = 1;
+}
+
+message GetFriendRequestsRequest {
+  int32 user_id = 1;
+}
+
+message FriendRequestInfo {
+  int32 id = 1;
+  int32 sender_id = 2;
+  string sender_username = 3;
+  string sender_display_name = 4;
+  string sender_avatar = 5;
+  string message = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
+
+message GetFriendRequestsResponse {
+  repeated FriendRequestInfo requests = 1;
+}
+
+message RemoveFriendRequest {
+  int32 user_id = 1;
+  int32 friend_id = 2;
+}
+
+message RemoveFriendResponse {
+  bool success = 1;
+  string error_message = 2;
+}

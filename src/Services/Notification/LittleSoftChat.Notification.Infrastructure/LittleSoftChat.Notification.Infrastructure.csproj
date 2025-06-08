@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="MySql.Data" Version="8.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LittleSoftChat.Notification.Domain\LittleSoftChat.Notification.Domain.csproj" />
+    <ProjectReference Include="..\LittleSoftChat.Notification.Application\LittleSoftChat.Notification.Application.csproj" />
+    <ProjectReference Include="..\..\..\Shared\LittleSoftChat.Shared.Infrastructure\LittleSoftChat.Shared.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

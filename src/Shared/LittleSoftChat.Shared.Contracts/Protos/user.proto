@@ -1,0 +1,62 @@
+syntax = "proto3";
+option csharp_namespace = "LittleSoftChat.Shared.Contracts";
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (UserResponse);
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse);
+  rpc ValidateUser(ValidateUserRequest) returns (ValidateUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
+}
+
+message GetUserRequest {
+  int32 user_id = 1;
+}
+
+message GetUsersRequest {
+  repeated int32 user_ids = 1;
+}
+
+message UserResponse {
+  int32 id = 1;
+  string username = 2;
+  string display_name = 3;
+  string avatar = 4;
+  bool is_active = 5;
+  string created_at = 6;
+}
+
+message GetUsersResponse {
+  repeated UserResponse users = 1;
+}
+
+message ValidateUserRequest {
+  int32 user_id = 1;
+}
+
+message ValidateUserResponse {
+  bool is_valid = 1;
+  string error_message = 2;
+}
+
+message UpdateUserRequest {
+  int32 user_id = 1;
+  string display_name = 2;
+  string avatar = 3;
+}
+
+message UpdateUserResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message SearchUsersRequest {
+  string keyword = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message SearchUsersResponse {
+  repeated UserResponse users = 1;
+  int32 total_count = 2;
+}

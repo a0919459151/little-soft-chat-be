@@ -1,0 +1,81 @@
+syntax = "proto3";
+option csharp_namespace = "LittleSoftChat.Shared.Contracts";
+
+import "google/protobuf/timestamp.proto";
+
+service NotificationService {
+  rpc SendNotification(SendNotificationRequest) returns (NotificationResponse);
+  rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse);
+  rpc MarkAsRead(MarkAsReadRequest) returns (NotificationResponse);
+  rpc GetUnreadCount(GetUnreadCountRequest) returns (UnreadCountResponse);
+  rpc DeleteNotification(DeleteNotificationRequest) returns (NotificationResponse);
+  rpc BroadcastMessage(BroadcastMessageRequest) returns (BroadcastResponse);
+}
+
+message SendNotificationRequest {
+  int32 user_id = 1;
+  string title = 2;
+  string content = 3;
+  string notification_type = 4;
+  string data = 5; // JSON 格式的額外資料
+}
+
+message NotificationResponse {
+  bool success = 1;
+  int32 notification_id = 2;
+  string error_message = 3;
+}
+
+message GetNotificationsRequest {
+  int32 user_id = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  bool unread_only = 4;
+}
+
+message NotificationInfo {
+  int32 id = 1;
+  int32 user_id = 2;
+  string title = 3;
+  string content = 4;
+  string notification_type = 5;
+  string data = 6;
+  bool is_read = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message GetNotificationsResponse {
+  repeated NotificationInfo notifications = 1;
+  int32 total_count = 2;
+}
+
+message MarkAsReadRequest {
+  int32 notification_id = 1;
+  int32 user_id = 2;
+}
+
+message GetUnreadCountRequest {
+  int32 user_id = 1;
+}
+
+message UnreadCountResponse {
+  int32 count = 1;
+}
+
+message DeleteNotificationRequest {
+  int32 notification_id = 1;
+  int32 user_id = 2;
+}
+
+message BroadcastMessageRequest {
+  string title = 1;
+  string content = 2;
+  string notification_type = 3;
+  repeated int32 target_user_ids = 4; // 空陣列表示廣播給所有用戶
+}
+
+message BroadcastResponse {
+  bool success = 1;
+  int32 sent_count = 2;
+  string error_message = 3;
+}
