@@ -1,0 +1,126 @@
+services:
+  # User Service
+  user-service:
+    build:
+      context: ../../
+      dockerfile: src/Services/User/LittleSoftChat.User.API/Dockerfile
+    container_name: little-soft-chat-user-service
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80;http://+:5011
+      - ConnectionStrings__DefaultConnection=Server=mysql;Database=LittleSoftChatDB;Uid=chatuser;Pwd=chatpass123;Port=3306;
+      - JwtSettings__Secret=YourSuperSecretKeyThatIsAtLeast32CharactersLong123456789
+      - JwtSettings__Issuer=LittleSoftChat
+      - JwtSettings__Audience=LittleSoftChat.Client
+      - JwtSettings__ExpiryHours=24
+    ports:
+      - "5001:80"      # HTTP API
+      - "5011:5011"    # gRPC
+    networks:
+      - little-soft-chat-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Chat Service
+  chat-service:
+    build:
+      context: ../../
+      dockerfile: src/Services/Chat/LittleSoftChat.Chat.API/Dockerfile
+    container_name: little-soft-chat-chat-service
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80;http://+:5012
+      - ConnectionStrings__DefaultConnection=Server=mysql;Database=LittleSoftChatDB;Uid=chatuser;Pwd=chatpass123;Port=3306;
+      - JwtSettings__Secret=YourSuperSecretKeyThatIsAtLeast32CharactersLong123456789
+      - JwtSettings__Issuer=LittleSoftChat
+      - JwtSettings__Audience=LittleSoftChat.Client
+      - JwtSettings__ExpiryHours=24
+      - GrpcClients__UserService=http://user-service:5011
+      - HttpClients__NotificationService=http://notification-service:80
+    ports:
+      - "5002:80"      # HTTP API
+      - "5012:5012"    # gRPC
+    networks:
+      - little-soft-chat-network
+    depends_on:
+      - user-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Notification Service
+  notification-service:
+    build:
+      context: ../../
+      dockerfile: src/Services/Notification/LittleSoftChat.Notification.API/Dockerfile
+    container_name: little-soft-chat-notification-service
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=mysql;Database=LittleSoftChatDB;Uid=chatuser;Pwd=chatpass123;Port=3306;
+      - JwtSettings__Secret=YourSuperSecretKeyThatIsAtLeast32CharactersLong123456789
+      - JwtSettings__Issuer=LittleSoftChat
+      - JwtSettings__Audience=LittleSoftChat.Client
+      - JwtSettings__ExpiryHours=24
+      - HttpClients__UserService=http://user-service:80
+      - HttpClients__ChatService=http://chat-service:80
+      - GrpcClients__UserService=http://user-service:5011
+      - GrpcClients__ChatService=http://chat-service:5012
+      - SignalR__HubPath=/chatHub
+      - SignalR__KeepAliveInterval=00:00:15
+      - SignalR__ClientTimeoutInterval=00:00:30
+    ports:
+      - "5003:80"
+    networks:
+      - little-soft-chat-network
+    depends_on:
+      - user-service
+      - chat-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Gateway API
+  gateway-api:
+    build:
+      context: ../../
+      dockerfile: src/Gateway/LittleSoftChat.Gateway.API/Dockerfile
+    container_name: little-soft-chat-gateway
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - JwtSettings__Secret=YourSuperSecretKeyThatIsAtLeast32CharactersLong123456789
+      - JwtSettings__Issuer=LittleSoftChat
+      - JwtSettings__Audience=LittleSoftChat.Client
+      - JwtSettings__ExpiryHours=24
+      - GrpcServices__UserService=http://user-service:5011
+      - GrpcServices__ChatService=http://chat-service:5012
+      - HttpServices__NotificationService=http://notification-service:80
+    ports:
+      - "5010:80"      # Main Gateway endpoint
+    networks:
+      - little-soft-chat-network
+    depends_on:
+      - user-service
+      - chat-service
+      - notification-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  little-soft-chat-network:
+    external: true
