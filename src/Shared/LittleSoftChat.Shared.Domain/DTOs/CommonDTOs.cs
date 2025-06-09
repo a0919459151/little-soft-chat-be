@@ -1,3 +1,5 @@
+using LittleSoftChat.Shared.Domain.Enums;
+
 namespace LittleSoftChat.Shared.Domain.DTOs;
 
 public class UserDto
@@ -16,7 +18,7 @@ public class MessageDto
     public int SenderId { get; set; }
     public int ReceiverId { get; set; }
     public string Content { get; set; } = string.Empty;
-    public string MessageType { get; set; } = "text";
+    public MessageType MessageType { get; set; } = MessageType.Text;
     public bool IsRead { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? ReadAt { get; set; }
@@ -38,7 +40,7 @@ public class FriendRequestDto
     public int ReceiverId { get; set; }
     public UserDto Requester { get; set; } = new();
     public UserDto Receiver { get; set; } = new();
-    public string Status { get; set; } = string.Empty;
+    public FriendshipStatus Status { get; set; } = FriendshipStatus.Pending;
     public DateTime CreatedAt { get; set; }
 }
 
@@ -46,7 +48,7 @@ public class NotificationDto
 {
     public int Id { get; set; }
     public int UserId { get; set; }
-    public string Type { get; set; } = string.Empty;
+    public NotificationType Type { get; set; } = NotificationType.System;
     public string Title { get; set; } = string.Empty;
     public string Content { get; set; } = string.Empty;
     public bool IsRead { get; set; }

@@ -1,3 +1,5 @@
+using LittleSoftChat.Shared.Domain.Enums;
+
 namespace LittleSoftChat.Chat.Domain.Entities;
 
 public class FriendshipEntity
@@ -8,11 +10,4 @@ public class FriendshipEntity
     public FriendshipStatus Status { get; set; } = FriendshipStatus.Pending;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? AcceptedAt { get; set; }
-}
-
-public enum FriendshipStatus
-{
-    Pending = 0,
-    Accepted = 1,
-    Rejected = 2
 }
